@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+/* ──────────────────────────────────────────────────────────────────────────
+   FONTS  (PROMPT §2 — token names fixed: --font-display / --font-body / --font-mono)
+   Maps Tailwind's font-* utilities to the next/font variables that are applied
+   on <html> in app/layout.tsx. Safe to define now (specified in the prompt).
+   ────────────────────────────────────────────────────────────────────────── */
+@theme {
+  --font-display: var(--font-space-grotesk);
+  --font-body: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   ⚠️  DESIGN TOKENS PENDING — TRIBUS_LABS_DESIGN.md was not provided.
+
+   The real semantic tokens go here once the spec arrives:
+     · §2 colors   → @theme (DARK as the default) + [data-theme="light"] override
+                     (--color-bg, --color-surface-1, --color-accent, …)
+     · §4 spacing  → @theme spacing scale
+     · §5 radius   → @theme radius scale
+     · §7 motion   → durations / easings
+
+   NOTHING below is the real design. The two neutral placeholder colors exist
+   ONLY so the dark/light toggle is visibly functional. Replace this entire
+   block with the DESIGN.md tokens — do not treat these values as the design.
+   ────────────────────────────────────────────────────────────────────────── */
+:root {
+  --color-bg: #0a0a0a; /* placeholder — replace with DESIGN.md §2 --color-bg */
+  --color-fg: #ededed; /* placeholder — replace with DESIGN.md §2 token */
+}
+html[data-theme="light"] {
+  --color-bg: #ffffff; /* placeholder */
+  --color-fg: #171717; /* placeholder */
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
