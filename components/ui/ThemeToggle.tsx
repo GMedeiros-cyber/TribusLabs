@@ -30,7 +30,7 @@ export function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label="Alternar tema"
-      className="relative inline-flex h-9 w-9 items-center justify-center rounded-md border border-current/20 transition-colors hover:border-current/40"
+      className="relative inline-flex h-9 w-9 items-center justify-center rounded-full border border-border text-text-secondary transition-colors hover:border-border-hover hover:text-text-primary"
     >
       {/* cross-fade sun (dark mode) / moon (light mode), 150ms */}
       <Sun

@@ -3,25 +3,27 @@ import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import { Providers } from "./providers";
 import "./globals.css";
 
-// PROMPT §2 — Space Grotesk (display), Inter (body), JetBrains Mono (mono).
+// DESIGN.md §3 — Space Grotesk (display), Inter (body), JetBrains Mono (mono).
+// Variable names match the doc exactly so var(--font-display/-body/-mono) work
+// directly in CSS (as §9 button styles use them).
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-space-grotesk",
+  variable: "--font-display",
   display: "swap",
 });
 
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500"],
-  variable: "--font-inter",
+  variable: "--font-body",
   display: "swap",
 });
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
-  variable: "--font-jetbrains-mono",
+  variable: "--font-mono",
   display: "swap",
 });
 
