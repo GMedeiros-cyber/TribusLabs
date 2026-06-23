@@ -1,15 +1,15 @@
 import { Navbar } from "@/components/sections/Navbar";
 import { Hero } from "@/components/sections/Hero";
+import { Results } from "@/components/sections/Results";
+import { Services } from "@/components/sections/Services";
 
 // Home real da Tribus Labs — recebe as seções incrementalmente.
-// Prompt 2: Navbar + Hero. As seções abaixo do hero são placeholders âncora
-// (próximas etapas) — existem para os links da navbar funcionarem e para a
-// página ter altura rolável (testar o sticky-on-scroll-up).
+// Prompt 2: Navbar + Hero. Prompt 3: Results (§02) + Services (§03).
+// As seções abaixo ainda são placeholders âncora (próximas etapas).
 const PLACEHOLDERS = [
-  { id: "servicos", eyebrow: "SERVIÇOS", title: "O que entregamos" },
-  { id: "como-funciona", eyebrow: "PROCESSO", title: "Como funciona" },
-  { id: "cases", eyebrow: "RESULTADOS", title: "Cases reais" },
-  { id: "contato", eyebrow: "PRÓXIMO PASSO", title: "Diagnóstico gratuito" },
+  { id: "como-funciona", eyebrow: "PROCESSO", title: "Como funciona", surface: true },
+  { id: "cases", eyebrow: "RESULTADOS", title: "Cases reais", surface: false },
+  { id: "contato", eyebrow: "PRÓXIMO PASSO", title: "Diagnóstico gratuito", surface: true },
 ];
 
 function PlaceholderSection({
@@ -30,7 +30,7 @@ function PlaceholderSection({
         surface ? "bg-surface-1" : "bg-bg"
       }`}
     >
-      <p className="text-eyebrow mb-3 text-accent">{eyebrow}</p>
+      <p className="text-eyebrow mb-3 text-text-secondary">{eyebrow}</p>
       <h2 className="text-display-md text-text-primary">{title}</h2>
       <p className="text-body-md mt-3 max-w-md text-text-secondary">
         Seção em construção — chega nas próximas etapas.
@@ -45,8 +45,10 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        {PLACEHOLDERS.map((p, i) => (
-          <PlaceholderSection key={p.id} {...p} surface={i % 2 === 0} />
+        <Results />
+        <Services />
+        {PLACEHOLDERS.map((p) => (
+          <PlaceholderSection key={p.id} {...p} />
         ))}
       </main>
     </>
