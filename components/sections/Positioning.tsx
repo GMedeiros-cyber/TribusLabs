@@ -1,0 +1,60 @@
+"use client";
+
+import { Check, X } from "lucide-react";
+import { Reveal } from "@/components/motion/Reveal";
+
+// §11/04 — Posicionamento diferencial. Por QUE a Tribus (não como).
+// Cada ponto contrasta a "negação" (riscada) com a "afirmação" (accent).
+const CONTRASTS = [
+  { no: "Mensalidade de agência", yes: "Projeto com preço fixo" },
+  { no: "Ferramenta avulsa que você aluga", yes: "Sistema completo e integrado" },
+  { no: "Dependência eterna de fornecedor", yes: "Código e dados são seus" },
+];
+
+const STAGGER = 0.06; // 60ms entre cards (§7)
+
+export function Positioning() {
+  return (
+    // seção de respiro/impacto — padding vertical maior (120px desktop)
+    <section className="bg-surface-1 py-24 md:py-[120px]">
+      <div className="mx-auto max-w-[1200px] px-6 md:px-12">
+        <Reveal>
+          <p className="text-eyebrow text-text-secondary">Por que a Tribus</p>
+          <h2 className="text-display-lg mt-3 max-w-3xl text-balance text-text-primary">
+            Você não assina. Você não aluga. Você possui.
+          </h2>
+          <p className="text-body-lg mt-4 max-w-[640px] text-text-secondary">
+            Agência cobra todo mês e some quando você para de pagar. A Tribus
+            entrega o sistema completo e te dá a chave. O que é seu, continua seu.
+          </p>
+        </Reveal>
+
+        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+          {CONTRASTS.map((c, i) => (
+            <Reveal key={c.yes} delay={i * STAGGER}>
+              <div className="flex h-full flex-col gap-4 rounded-lg border-[0.5px] border-border bg-surface-2 p-6">
+                {/* negação — secondary (AA) + riscado + X */}
+                <div className="flex items-center gap-3">
+                  <X
+                    className="h-5 w-5 shrink-0 text-text-secondary"
+                    aria-hidden
+                  />
+                  <span className="text-body-sm text-text-secondary line-through">
+                    {c.no}
+                  </span>
+                </div>
+                {/* afirmação — accent + check */}
+                <div className="flex items-center gap-3">
+                  <Check className="h-5 w-5 shrink-0 text-accent" aria-hidden />
+                  <span className="text-body-md font-medium text-text-primary">
+                    {c.yes}
+                  </span>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

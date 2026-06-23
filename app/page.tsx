@@ -2,14 +2,16 @@ import { Navbar } from "@/components/sections/Navbar";
 import { Hero } from "@/components/sections/Hero";
 import { Results } from "@/components/sections/Results";
 import { Services } from "@/components/sections/Services";
+import { Positioning } from "@/components/sections/Positioning";
+import { Process } from "@/components/sections/Process";
 
 // Home real da Tribus Labs — recebe as seções incrementalmente.
-// Prompt 2: Navbar + Hero. Prompt 3: Results (§02) + Services (§03).
-// As seções abaixo ainda são placeholders âncora (próximas etapas).
+// P2: Navbar + Hero · P3: Results (§02) + Services (§03) ·
+// P4: Positioning (§04) + Process (§05). Restam stubs #cases e #contato.
+// Ritmo de superfície alternado: bg → surface-1 → bg → surface-1 → bg → ...
 const PLACEHOLDERS = [
-  { id: "como-funciona", eyebrow: "PROCESSO", title: "Como funciona", surface: true },
-  { id: "cases", eyebrow: "RESULTADOS", title: "Cases reais", surface: false },
-  { id: "contato", eyebrow: "PRÓXIMO PASSO", title: "Diagnóstico gratuito", surface: true },
+  { id: "cases", eyebrow: "RESULTADOS", title: "Cases reais", surface: true },
+  { id: "contato", eyebrow: "PRÓXIMO PASSO", title: "Diagnóstico gratuito", surface: false },
 ];
 
 function PlaceholderSection({
@@ -47,6 +49,8 @@ export default function Home() {
         <Hero />
         <Results />
         <Services />
+        <Positioning />
+        <Process />
         {PLACEHOLDERS.map((p) => (
           <PlaceholderSection key={p.id} {...p} />
         ))}
