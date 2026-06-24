@@ -4,14 +4,16 @@ import { Results } from "@/components/sections/Results";
 import { Services } from "@/components/sections/Services";
 import { Positioning } from "@/components/sections/Positioning";
 import { Process } from "@/components/sections/Process";
+import { Market } from "@/components/sections/Market";
+import { Cases } from "@/components/sections/Cases";
 
 // Home real da Tribus Labs — recebe as seções incrementalmente.
 // P2: Navbar + Hero · P3: Results (§02) + Services (§03) ·
-// P4: Positioning (§04) + Process (§05). Restam stubs #cases e #contato.
-// Ritmo de superfície alternado: bg → surface-1 → bg → surface-1 → bg → ...
+// P4: Positioning (§04) + Process (§05) · P5: Market (§06) + Cases (§07).
+// Resta o stub #contato (§08 CTA, próxima etapa).
+// Ritmo de superfície alternado: bg → surface-1 → bg → surface-1 → ...
 const PLACEHOLDERS = [
-  { id: "cases", eyebrow: "RESULTADOS", title: "Cases reais", surface: true },
-  { id: "contato", eyebrow: "PRÓXIMO PASSO", title: "Diagnóstico gratuito", surface: false },
+  { id: "contato", eyebrow: "PRÓXIMO PASSO", title: "Diagnóstico gratuito", surface: true },
 ];
 
 function PlaceholderSection({
@@ -35,7 +37,7 @@ function PlaceholderSection({
       <p className="text-eyebrow mb-3 text-text-secondary">{eyebrow}</p>
       <h2 className="text-display-md text-text-primary">{title}</h2>
       <p className="text-body-md mt-3 max-w-md text-text-secondary">
-        Seção em construção — chega nas próximas etapas.
+        Seção em construção — chega na próxima etapa.
       </p>
     </section>
   );
@@ -51,6 +53,8 @@ export default function Home() {
         <Services />
         <Positioning />
         <Process />
+        <Market />
+        <Cases />
         {PLACEHOLDERS.map((p) => (
           <PlaceholderSection key={p.id} {...p} />
         ))}

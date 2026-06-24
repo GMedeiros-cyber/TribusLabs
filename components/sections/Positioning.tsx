@@ -21,11 +21,12 @@ export function Positioning() {
         <Reveal>
           <p className="text-eyebrow text-text-secondary">Por que a Tribus</p>
           <h2 className="text-display-lg mt-3 max-w-3xl text-balance text-text-primary">
-            Você não assina. Você não aluga. Você possui.
+            Agência te cobra pra sempre. A Tribus te entrega a chave.
           </h2>
           <p className="text-body-lg mt-4 max-w-[640px] text-text-secondary">
-            Agência cobra todo mês e some quando você para de pagar. A Tribus
-            entrega o sistema completo e te dá a chave. O que é seu, continua seu.
+            Toda mensalidade de agência é um aluguel: você paga eternamente por
+            algo que nunca é seu. Quando para de pagar, perde tudo. Aqui o sistema
+            é construído, entregue, e a propriedade passa pra você.
           </p>
         </Reveal>
 

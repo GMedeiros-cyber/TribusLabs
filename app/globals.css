@@ -289,6 +289,14 @@
     border-color: var(--color-accent);
     transform: translateY(-2px);
   }
+
+  /* §9 carousel — esconde a scrollbar (navegação por setas/dots/swipe) */
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* §7 — prefers-reduced-motion: desativa animações/transições.
