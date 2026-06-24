@@ -290,6 +290,27 @@
     transform: translateY(-2px);
   }
 
+  /* §08 — CTA final: "momento escuro" de fechamento. Permanece dark mesmo em
+     light mode re-declarando os tokens dark localmente. Como custom properties
+     herdam, o subtree da seção vence o [data-theme="light"] do <html>. */
+  .section-dark {
+    color-scheme: dark;
+    --color-bg: #09090b;
+    --color-surface-1: #111115;
+    --color-surface-2: #1c1c22;
+    --color-surface-3: #27272d;
+    --color-border: rgba(255, 255, 255, 0.07);
+    --color-border-hover: rgba(255, 255, 255, 0.13);
+    --color-accent: #60a5fa;
+    --color-accent-hover: #93c5fd;
+    --color-accent-fg: #09090b;
+    --color-text-primary: #f4f4f5;
+    --color-text-secondary: #a1a1aa;
+    --color-text-muted: #52525b;
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+  }
+
   /* §9 carousel — esconde a scrollbar (navegação por setas/dots/swipe) */
   .no-scrollbar {
     scrollbar-width: none;
