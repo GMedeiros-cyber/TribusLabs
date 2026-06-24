@@ -82,7 +82,7 @@ export function Hero() {
                 <dt className="font-mono text-sm font-medium text-text-primary">
                   {s.value}
                 </dt>
-                <dd className="text-caption text-text-muted">{s.label}</dd>
+                <dd className="text-caption text-text-secondary">{s.label}</dd>
               </div>
             ))}
           </dl>

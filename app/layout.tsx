@@ -27,9 +27,43 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+// §13 — SEO. metadataBase é placeholder até o domínio final ser confirmado.
+// TODO: confirmar domínio de produção da Tribus Labs.
+const SITE_URL = "https://tribuslabs.com.br";
+
+const DESCRIPTION =
+  "Sistemas de automação e agentes de IA que a sua empresa possui, não aluga. " +
+  "Site, WhatsApp automático, CRM próprio e agente que atende, agenda e cobra. " +
+  "Guarulhos/SP.";
+
 export const metadata: Metadata = {
-  title: "Tribus Labs",
-  description: "Tribus Labs",
+  metadataBase: new URL(SITE_URL),
+  title: "Tribus Labs — Funcionários digitais para a sua empresa",
+  description: DESCRIPTION,
+  openGraph: {
+    title: "Tribus Labs — Funcionários digitais para a sua empresa",
+    description: DESCRIPTION,
+    type: "website",
+    locale: "pt_BR",
+    siteName: "Tribus Labs",
+    url: SITE_URL,
+  },
+};
+
+// §13 — JSON-LD Organization (schema.org) injetado no <head> via <script>.
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Tribus Labs",
+  description: DESCRIPTION,
+  url: SITE_URL,
+  areaServed: "Guarulhos/SP",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Guarulhos",
+    addressRegion: "SP",
+    addressCountry: "BR",
+  },
 };
 
 export default function RootLayout({
@@ -44,6 +78,11 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <script
+          type="application/ld+json"
+          // JSON.stringify de objeto controlado (sem input do usuário) — seguro.
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         <Providers>{children}</Providers>
       </body>
     </html>

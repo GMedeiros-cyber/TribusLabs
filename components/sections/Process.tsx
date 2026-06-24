@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { Reveal } from "@/components/motion/Reveal";
+import { useMounted } from "@/components/motion/useMounted";
 
 // --ease-out (§7)
 const EASE_OUT: [number, number, number, number] = [0, 0, 0.2, 1];
@@ -30,11 +31,15 @@ const STAGGER = 0.06; // 60ms entre steps (§7)
 // Conector horizontal entre steps (desktop) — cresce com scaleX 0→1 da esquerda.
 // 1px, accent @30%. Some no mobile. Respeita reduced-motion (estado final direto).
 function Connector({ delay }: { delay: number }) {
+  const mounted = useMounted();
   const reduce = useReducedMotion();
   const className =
     "absolute left-14 right-[-1.5rem] top-5 hidden h-px origin-left bg-accent/30 md:block";
 
-  if (reduce) return <div className={className} aria-hidden />;
+  // Antes de montar (ou com reduce), renderiza o estado final (sem transform):
+  // mesmo HTML servidor/cliente. Sem isso, o motion.div emitiria
+  // transform:scaleX(0) no SSR e divergiria do 1º render com reduce-motion.
+  if (!mounted || reduce) return <div className={className} aria-hidden />;
 
   return (
     <motion.div

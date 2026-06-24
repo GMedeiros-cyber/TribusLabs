@@ -11,6 +11,7 @@ import {
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { Button } from "@/components/ui/Button";
+import { useMounted } from "@/components/motion/useMounted";
 
 // --ease-out (§7)
 const EASE_OUT: [number, number, number, number] = [0, 0, 0.2, 1];
@@ -23,6 +24,7 @@ const NAV_LINKS = [
 ];
 
 export function Navbar() {
+  const mounted = useMounted();
   const reduce = useReducedMotion();
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
@@ -58,10 +60,14 @@ export function Navbar() {
 
   return (
     <motion.header
-      initial={reduce ? false : { y: -4, opacity: 0 }}
+      // initial={false}: 1ª render usa direto os valores de `animate` (sem
+      // animar). Antes de montar, `animate` é o estado neutro fixo (y:0,
+      // opacity:1) — idêntico no servidor e no cliente, sem mismatch. O
+      // hide-on-scroll só passa a valer depois de montado.
+      initial={false}
       animate={{
-        y: hidden && !reduce ? "-100%" : 0,
-        opacity: hidden && !reduce ? 0 : 1,
+        y: mounted && hidden && !reduce ? "-100%" : 0,
+        opacity: mounted && hidden && !reduce ? 0 : 1,
       }}
       transition={reduce ? { duration: 0 } : { duration: 0.3, ease: EASE_OUT }}
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-200 ${

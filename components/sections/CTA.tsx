@@ -51,7 +51,7 @@ function maskPhone(value: string): string {
 }
 
 const FIELD_CLASS =
-  "w-full rounded-md border-[0.5px] border-border bg-surface-2 px-4 py-3 text-body-md text-text-primary transition-colors placeholder:text-text-muted focus:border-accent focus:outline-none aria-[invalid=true]:border-red-400";
+  "w-full rounded-md border-[0.5px] border-border bg-surface-2 px-4 py-3 text-body-md text-text-primary transition-colors placeholder:text-text-secondary focus:border-accent focus:outline-none aria-[invalid=true]:border-red-400";
 
 export function CTA() {
   const [submitted, setSubmitted] = useState(false);

@@ -140,7 +140,7 @@ export function Cases() {
                     {c.segment}
                   </span>
                   {c.placeholder && (
-                    <span className="rounded-pill border-[0.5px] border-border-hover px-2 py-0.5 text-caption text-text-muted">
+                    <span className="rounded-pill border-[0.5px] border-border-hover px-2 py-0.5 text-caption text-text-secondary">
                       a confirmar
                     </span>
                   )}
