@@ -1,93 +1,171 @@
 "use client";
 
-import { Reveal } from "@/components/motion/Reveal";
-import { Button } from "@/components/ui/Button";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { ArrowRight, Check } from "lucide-react";
+import { BackgroundVideo } from "@/components/sections/BackgroundVideo";
+import { Navbar } from "@/components/sections/Navbar";
+import { Appear } from "@/components/motion/Appear";
 
-// HEADLINE — escolha do Gabriel. Opção 1 ativa por padrão.
-// Para trocar: comente a OPTION_1 e descomente a 2 ou 3 (ajuste o `active`).
-const HEADLINE_OPTION_1 = {
-  headline: "Você não assina. Você não aluga. Você possui.",
-  subhead:
-    "Funcionários digitais que atendem, agendam e cobram pela sua empresa. O sistema é seu, pra sempre — sem mensalidade de agência.",
-};
-// const HEADLINE_OPTION_2 = {
-//   headline: "Uma empresa só. Tudo resolvido.",
-//   subhead:
-//     "Site, automação, agente de IA e CRM próprio. A estrutura digital que antes só empresa grande tinha — agora cabe na sua.",
-// };
-// const HEADLINE_OPTION_3 = {
-//   headline: "Pare de fazer o trabalho que dois fariam.",
-//   subhead:
-//     "A Tribus constrói os funcionários digitais que cuidam da sua operação 24h. Você foca no negócio. O sistema faz o resto.",
-// };
-const { headline, subhead } = HEADLINE_OPTION_1;
+// Nova hero por vídeo (Prompt 8). Tela cheia (100vh), fundo preto + vídeo HLS,
+// navbar glass + CTA de captura de e-mail. Decisão híbrida: headline/CTA em
+// PT-BR Tribus; tagline e "Play Video Demo" mantidos como no spec por ora.
 
-// Social proof (acima da dobra) — número em JetBrains Mono, label em Inter.
-const STATS = [
-  { value: "R$ 15.000", label: "recuperados em 2 passeios" },
-  { value: "100%", label: "do sistema é do cliente" },
-  { value: "30 dias", label: "para a entrega completa" },
-];
-
-const STAGGER = 0.06; // 60ms entre elementos (§7)
+const HEADING_EASE = [0.16, 1, 0.3, 1] as const;
+const PROMPT_TEXT = "Seu melhor e-mail para o diagnóstico";
+const SUCCESS_TEXT = "Pronto! Retornamos em até 24h";
+const TYPE_MS = 60;
+const RESET_MS = 4000;
 
 export function Hero() {
+  const [mode, setMode] = useState<"button" | "form">("button");
+  const [submitted, setSubmitted] = useState(false);
+  const [typed, setTyped] = useState("");
+  const [email, setEmail] = useState("");
+
+  // Typewriter: digita o placeholder ao abrir o form e ao confirmar o envio.
+  useEffect(() => {
+    if (mode !== "form") return;
+    const target = submitted ? SUCCESS_TEXT : PROMPT_TEXT;
+    let i = 0;
+    const id = setInterval(() => {
+      setTyped(target.slice(0, i));
+      if (i >= target.length) {
+        clearInterval(id);
+        return;
+      }
+      i++;
+    }, TYPE_MS);
+    return () => clearInterval(id);
+  }, [mode, submitted]);
+
+  // Após enviar, volta ao estado de botão em 4s.
+  useEffect(() => {
+    if (!submitted) return;
+    const id = setTimeout(() => {
+      setSubmitted(false);
+      setMode("button");
+      setEmail("");
+    }, RESET_MS);
+    return () => clearTimeout(id);
+  }, [submitted]);
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // TODO: conectar ao backend/n8n/webhook
+    setSubmitted(true);
+  };
+
   return (
-    <section
+    <div
       id="top"
-      className="hero-bg relative flex min-h-[90vh] flex-col items-center justify-center px-6 pb-16 pt-28 text-center md:pt-32"
+      className="relative bg-black h-screen w-full flex flex-col overflow-hidden selection:bg-white selection:text-black"
     >
-      <div className="mx-auto flex w-full max-w-3xl flex-col items-center">
-        {/* 1 · eyebrow — §01 pede "muted"; uso text-secondary p/ passar AA (4.5:1) */}
-        <Reveal delay={STAGGER * 0}>
-          <p className="text-eyebrow text-text-secondary">
-            TRIBUS LABS · GUARULHOS/SP
-          </p>
-        </Reveal>
+      <BackgroundVideo />
+      <Navbar />
 
-        {/* 2 · headline */}
-        <Reveal delay={STAGGER * 1} className="mt-5">
-          <h1 className="text-display-xl text-balance text-text-primary">
-            {headline}
-          </h1>
-        </Reveal>
+      <section className="relative flex-1 flex flex-col items-center justify-center px-6">
+        <div className="relative z-10 text-center max-w-5xl mx-auto flex flex-col items-center justify-center w-full gap-12">
+          {/* Tagline (mantida como no spec, por ora) */}
+          <Appear
+            as="p"
+            from={{ opacity: 0, y: 10 }}
+            transition={{ delay: 0.1 }}
+            className="text-white/80 text-[10px] md:text-[11px] font-medium tracking-[0.2em] uppercase mb-4"
+          >
+            BUILD A NO-CODE AI APP IN MINUTES
+          </Appear>
 
-        {/* 3 · subheadline */}
-        <Reveal delay={STAGGER * 2} className="mt-6">
-          <p className="text-body-lg mx-auto max-w-[580px] text-text-secondary">
-            {subhead}
-          </p>
-        </Reveal>
+          {/* Headline — Tribus PT-BR, em Instrument Serif */}
+          <Appear
+            as="h1"
+            from={{ opacity: 0, y: 20 }}
+            transition={{ duration: 1, ease: HEADING_EASE }}
+            style={{ fontFamily: "var(--font-serif), 'Instrument Serif', serif" }}
+            className="text-4xl md:text-[64px] font-medium tracking-[-0.01em] leading-[1.1] mb-6 bg-gradient-to-b from-white via-white/95 to-white/70 bg-clip-text text-transparent max-w-4xl"
+          >
+            Você não assina. Você não aluga.
+            <br className="hidden md:block" /> Você possui.
+          </Appear>
 
-        {/* 4 · CTAs (gap 12px) */}
-        <Reveal delay={STAGGER * 3} className="mt-8">
-          <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            <Button href="#contato" variant="primary">
-              Diagnóstico gratuito
-            </Button>
-            <Button href="#como-funciona" variant="secondary">
-              Ver como funciona
-            </Button>
-          </div>
-        </Reveal>
+          {/* CTA — botão ↔ form de e-mail (Tribus PT-BR) */}
+          <Appear
+            as="div"
+            from={{ opacity: 0, y: 10 }}
+            transition={{ delay: 0.4 }}
+            className="min-h-[50px] mt-2"
+          >
+            <AnimatePresence mode="wait">
+              {mode === "button" ? (
+                <motion.button
+                  key="button"
+                  type="button"
+                  onClick={() => setMode("form")}
+                  initial={{ scale: 0.95, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.95, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="px-10 py-3 text-[14px] font-medium border border-white/10 rounded-full hover:border-white/30 hover:bg-white/[0.02] transition-all duration-300 text-white/90 backdrop-blur-sm cursor-pointer"
+                >
+                  Diagnóstico gratuito
+                </motion.button>
+              ) : (
+                <motion.form
+                  key="form"
+                  onSubmit={onSubmit}
+                  initial={{ scale: 0.95, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.95, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="flex items-center gap-2 pl-5 pr-1.5 py-1.5 text-[14px] font-medium border border-white/20 rounded-full bg-white/[0.02] backdrop-blur-sm w-full max-w-[320px] focus-within:border-white/40 transition-colors duration-300"
+                >
+                  <input
+                    type="email"
+                    required
+                    autoFocus
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder={typed}
+                    aria-label="E-mail para diagnóstico gratuito"
+                    className="flex-1 min-w-0 bg-transparent text-white placeholder:text-white/45 outline-none"
+                  />
+                  <button
+                    type="submit"
+                    aria-label="Enviar e-mail"
+                    className="flex items-center justify-center w-9 h-9 shrink-0 rounded-full bg-white text-black hover:opacity-90 transition-opacity cursor-pointer"
+                  >
+                    <AnimatePresence mode="wait" initial={false}>
+                      <motion.span
+                        key={submitted ? "check" : "arrow"}
+                        initial={{ scale: 0.95 }}
+                        animate={{ scale: 1 }}
+                        transition={{ duration: 0.2 }}
+                        className="flex"
+                      >
+                        {submitted ? (
+                          <Check className="w-4 h-4" />
+                        ) : (
+                          <ArrowRight className="w-4 h-4" />
+                        )}
+                      </motion.span>
+                    </AnimatePresence>
+                  </button>
+                </motion.form>
+              )}
+            </AnimatePresence>
+          </Appear>
 
-        {/* 5 · social proof — empilha no mobile, linha c/ divisor no desktop */}
-        <Reveal delay={STAGGER * 4} className="mt-14 w-full">
-          <dl className="mx-auto flex max-w-2xl flex-col divide-y divide-border sm:flex-row sm:divide-x sm:divide-y-0">
-            {STATS.map((s) => (
-              <div
-                key={s.value}
-                className="flex flex-1 flex-col items-center gap-1 px-6 py-3 sm:py-0"
-              >
-                <dt className="font-mono text-sm font-medium text-text-primary">
-                  {s.value}
-                </dt>
-                <dd className="text-caption text-text-secondary">{s.label}</dd>
-              </div>
-            ))}
-          </dl>
-        </Reveal>
-      </div>
-    </section>
+          {/* Play demo (mantido como no spec, por ora) */}
+          <Appear as="div" from={{ opacity: 0 }} to={{ opacity: 1 }} transition={{ delay: 0.8 }}>
+            <a
+              href="#"
+              className="text-white/80 hover:text-white/40 transition-colors duration-300 text-[13px] font-medium tracking-wide"
+            >
+              Play Video Demo
+            </a>
+          </Appear>
+        </div>
+      </section>
+    </div>
   );
 }
