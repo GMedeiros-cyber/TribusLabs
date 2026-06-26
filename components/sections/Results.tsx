@@ -1,7 +1,6 @@
 "use client";
 
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
-import { Parallax } from "@/components/motion/Parallax";
 
 // §11/02 — Resultados que entregamos. Mostra VALOR DE NEGÓCIO (o que o cliente
 // ganha), nunca dor/problema. Número grande em accent + label + contexto curto.
@@ -30,7 +29,7 @@ const RESULTS = [
   },
 ];
 
-const STAGGER = 0.06; // 60ms entre cards (§7)
+const STAGGER = 0.12; // 120ms entre cards (§7) — cascata mais visível
 
 export function Results() {
   return (
@@ -39,18 +38,15 @@ export function Results() {
       className="scroll-mt-20 bg-surface-1 py-16 md:py-24"
     >
       <div className="mx-auto max-w-[1200px] px-6 md:px-12">
-        <Parallax>
-          <ScrollReveal>
-            {/* eyebrow em secondary (regra global — AA) */}
-            <p className="text-eyebrow text-text-secondary">O que você ganha</p>
-            <h2 className="text-display-lg mt-3 max-w-3xl text-balance text-text-primary">
-              Resultado que aparece no caixa, não no relatório.
-            </h2>
-          </ScrollReveal>
-        </Parallax>
+        <ScrollReveal>
+          {/* eyebrow em secondary (regra global — AA) */}
+          <p className="text-eyebrow text-text-secondary">O que você ganha</p>
+          <h2 className="text-display-lg mt-3 max-w-3xl text-balance text-text-primary">
+            Resultado que aparece no caixa, não no relatório.
+          </h2>
+        </ScrollReveal>
 
-        <Parallax className="mt-12" amount={28}>
-          <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <dl className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {RESULTS.map((r, i) => (
               <ScrollReveal key={r.label} delay={i * STAGGER}>
                 <div className="flex h-full flex-col">
@@ -67,7 +63,6 @@ export function Results() {
               </ScrollReveal>
             ))}
           </dl>
-        </Parallax>
       </div>
     </section>
   );

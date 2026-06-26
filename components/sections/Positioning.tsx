@@ -11,7 +11,7 @@ const CONTRASTS = [
   { no: "Dependência eterna de fornecedor", yes: "Código e dados são seus" },
 ];
 
-const STAGGER = 0.06; // 60ms entre cards (§7)
+const STAGGER = 0.12; // 120ms entre cards (§7) — cascata mais visível
 
 export function Positioning() {
   return (

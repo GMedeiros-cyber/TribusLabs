@@ -2,7 +2,6 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
-import { Parallax } from "@/components/motion/Parallax";
 import { useMounted } from "@/components/motion/useMounted";
 
 // --ease-out (§7)
@@ -27,7 +26,7 @@ const STEPS = [
   },
 ];
 
-const STAGGER = 0.06; // 60ms entre steps (§7)
+const STAGGER = 0.12; // 120ms entre steps (§7) — cascata mais visível
 
 // Conector horizontal entre steps (desktop) — cresce com scaleX 0→1 da esquerda.
 // 1px, accent @30%. Some no mobile. Respeita reduced-motion (estado final direto).
@@ -58,18 +57,16 @@ export function Process() {
   return (
     <section id="como-funciona" className="scroll-mt-20 bg-bg py-16 md:py-24">
       <div className="mx-auto max-w-[1200px] px-6 md:px-12">
-        <Parallax>
-          <ScrollReveal>
-            <p className="text-eyebrow text-text-secondary">Processo</p>
-            <h2 className="text-display-lg mt-3 max-w-3xl text-balance text-text-primary">
-              Do diagnóstico à chave na mão.
-            </h2>
-            <p className="text-body-lg mt-4 max-w-[600px] text-text-secondary">
-              Três etapas. Sem enrolação, sem mensalidade surpresa. Quando
-              termina, o sistema é seu.
-            </p>
-          </ScrollReveal>
-        </Parallax>
+        <ScrollReveal>
+          <p className="text-eyebrow text-text-secondary">Processo</p>
+          <h2 className="text-display-lg mt-3 max-w-3xl text-balance text-text-primary">
+            Do diagnóstico à chave na mão.
+          </h2>
+          <p className="text-body-lg mt-4 max-w-[600px] text-text-secondary">
+            Três etapas. Sem enrolação, sem mensalidade surpresa. Quando
+            termina, o sistema é seu.
+          </p>
+        </ScrollReveal>
 
         <ol className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-6">
           {STEPS.map((s, i) => (

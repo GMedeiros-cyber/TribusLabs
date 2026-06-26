@@ -15,8 +15,8 @@ interface ScrollRevealProps {
 }
 
 // Revelação cinematográfica ligada ao scroll (GSAP ScrollTrigger + useGSAP).
-// Entra de { opacity: 0, y: 60 } → { opacity: 1, y: 0 } quando o elemento chega
-// a 80% da viewport; reverte ao sair pra cima (toggleActions play/reverse).
+// Entra de { opacity: 0, y: 80 } → { opacity: 1, y: 0 } quando o elemento chega
+// a 85% da viewport e PERMANECE visível (toggleActions play none none none).
 // • Client-only via useGSAP → sem execução no SSR (server renderiza um <div>
 //   neutro e VISÍVEL; o opacity:0 só entra após montar, antes do paint, sem
 //   flash e sem mismatch de hidratação).
@@ -36,14 +36,15 @@ export function ScrollReveal({
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         gsap.from(ref.current, {
           opacity: 0,
-          y: 60,
-          duration: 0.8,
+          y: 80,
+          duration: 0.9,
           ease: "power3.out",
           delay,
           scrollTrigger: {
             trigger: ref.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
+            start: "top 85%",
+            // sem reverse: depois de entrar, fica visível (não some ao subir).
+            toggleActions: "play none none none",
           },
         });
       });

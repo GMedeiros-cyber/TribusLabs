@@ -1,7 +1,6 @@
 "use client";
 
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
-import { Parallax } from "@/components/motion/Parallax";
 
 // §11/06 — O mercado já decidiu. Prova social por autoridade: empresas globais
 // que adotaram IA cedo e tiveram resultado mensurável (todos verificáveis).
@@ -44,28 +43,25 @@ const COMPANIES = [
   },
 ];
 
-const STAGGER = 0.06; // 60ms entre cards (§7)
+const STAGGER = 0.12; // 120ms entre cards (§7) — cascata mais visível
 
 export function Market() {
   return (
     <section className="bg-surface-1 py-16 md:py-24">
       <div className="mx-auto max-w-[1200px] px-6 md:px-12">
-        <Parallax>
-          <ScrollReveal>
-            <p className="text-eyebrow text-text-secondary">O mercado já decidiu</p>
-            <h2 className="text-display-lg mt-3 max-w-3xl text-balance text-text-primary">
-              Quem entendeu cedo, saiu na frente.
-            </h2>
-            <p className="text-body-lg mt-4 max-w-[600px] text-text-secondary">
-              As maiores empresas do mundo não usam IA por moda. Usam porque dá
-              resultado mensurável. A diferença é que agora isso cabe na sua
-              empresa também.
-            </p>
-          </ScrollReveal>
-        </Parallax>
+        <ScrollReveal>
+          <p className="text-eyebrow text-text-secondary">O mercado já decidiu</p>
+          <h2 className="text-display-lg mt-3 max-w-3xl text-balance text-text-primary">
+            Quem entendeu cedo, saiu na frente.
+          </h2>
+          <p className="text-body-lg mt-4 max-w-[600px] text-text-secondary">
+            As maiores empresas do mundo não usam IA por moda. Usam porque dá
+            resultado mensurável. A diferença é que agora isso cabe na sua
+            empresa também.
+          </p>
+        </ScrollReveal>
 
-        <Parallax className="mt-12" amount={28}>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {COMPANIES.map((c, i) => (
               <ScrollReveal key={c.name} delay={i * STAGGER}>
                 <div className="flex h-full flex-col rounded-lg border-[0.5px] border-border bg-surface-2 p-6">
@@ -78,7 +74,6 @@ export function Market() {
               </ScrollReveal>
             ))}
           </div>
-        </Parallax>
 
         <ScrollReveal delay={STAGGER * 2}>
           <p className="text-display-md mx-auto mt-12 max-w-3xl text-balance text-center text-text-primary">

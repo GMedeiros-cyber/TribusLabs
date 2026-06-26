@@ -17,8 +17,8 @@ export function Navbar() {
       to={{ opacity: 1, y: 0 }}
       className="relative z-20 px-6 py-6 w-full"
     >
-      {/* relative: âncora p/ o logo absoluto à esquerda; SlideTabs centralizada via mx-auto */}
-      <div className="relative flex items-center justify-center max-w-6xl mx-auto">
+      {/* full-width: logo absoluto encosta na borda (px-6 do nav ≈ 24px); SlideTabs centralizada */}
+      <div className="relative flex items-center justify-center">
         <a
           href="#top"
           aria-label="Tribus Labs — início"

@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useReducedMotion } from "motion/react";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
-import { Parallax } from "@/components/motion/Parallax";
 
 type Case = {
   segment: string;
@@ -102,14 +101,12 @@ export function Cases() {
     <section id="cases" className="scroll-mt-20 bg-bg py-16 md:py-24">
       <div className="mx-auto max-w-[1200px]">
         <div className="px-6 md:px-12">
-          <Parallax>
-            <ScrollReveal>
-              <p className="text-eyebrow text-text-secondary">Resultados reais</p>
-              <h2 className="text-display-lg mt-3 max-w-3xl text-balance text-text-primary">
-                Não é promessa. É o que já entregamos.
-              </h2>
-            </ScrollReveal>
-          </Parallax>
+          <ScrollReveal>
+            <p className="text-eyebrow text-text-secondary">Resultados reais</p>
+            <h2 className="text-display-lg mt-3 max-w-3xl text-balance text-text-primary">
+              Não é promessa. É o que já entregamos.
+            </h2>
+          </ScrollReveal>
         </div>
 
         <ScrollReveal>

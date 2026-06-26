@@ -10,7 +10,6 @@ import {
   Sparkles,
 } from "lucide-react";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
-import { Parallax } from "@/components/motion/Parallax";
 
 // §11/03 — O que entregamos. 6 "funcionários digitais" como cards (§9).
 type Service = { icon: LucideIcon; title: string; description: string };
@@ -50,27 +49,24 @@ const SERVICES: Service[] = [
   },
 ];
 
-const STAGGER = 0.06; // 60ms entre cards (§7)
+const STAGGER = 0.12; // 120ms entre cards (§7) — cascata mais visível
 
 export function Services() {
   return (
     <section id="servicos" className="scroll-mt-20 bg-bg py-16 md:py-24">
       <div className="mx-auto max-w-[1200px] px-6 md:px-12">
-        <Parallax>
-          <ScrollReveal>
-            <p className="text-eyebrow text-text-secondary">Serviços</p>
-            <h2 className="text-display-lg mt-3 max-w-3xl text-balance text-text-primary">
-              Seis funcionários digitais. Um sistema só.
-            </h2>
-            <p className="text-body-lg mt-4 max-w-[600px] text-text-secondary">
-              Cada peça resolve uma parte da sua operação. Juntas, elas
-              substituem o trabalho de um time inteiro.
-            </p>
-          </ScrollReveal>
-        </Parallax>
+        <ScrollReveal>
+          <p className="text-eyebrow text-text-secondary">Serviços</p>
+          <h2 className="text-display-lg mt-3 max-w-3xl text-balance text-text-primary">
+            Seis funcionários digitais. Um sistema só.
+          </h2>
+          <p className="text-body-lg mt-4 max-w-[600px] text-text-secondary">
+            Cada peça resolve uma parte da sua operação. Juntas, elas
+            substituem o trabalho de um time inteiro.
+          </p>
+        </ScrollReveal>
 
-        <Parallax className="mt-12" amount={28}>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2">
             {SERVICES.map((s, i) => {
               const Icon = s.icon;
               return (
@@ -88,7 +84,6 @@ export function Services() {
               );
             })}
           </div>
-        </Parallax>
       </div>
     </section>
   );

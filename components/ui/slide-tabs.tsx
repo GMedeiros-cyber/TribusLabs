@@ -42,9 +42,15 @@ export function SlideTabs({ tabs = DEFAULT_TABS }: { tabs?: SlideTab[] }) {
     width: 0,
     opacity: 0,
   });
-  // Aba selecionada (default: primeira).
+  // Aba selecionada (default: primeira) e aba sob o cursor (hover).
   const [selected, setSelected] = useState(0);
+  const [hovered, setHovered] = useState<number | null>(null);
   const tabsRef = useRef<Array<HTMLLIElement | null>>([]);
+
+  // O cursor branco fica sob a aba "ativa" = a que está em hover, ou a
+  // selecionada quando nada está em hover. Essa aba recebe texto ESCURO
+  // (legível sobre o branco); as demais ficam claras.
+  const activeIndex = hovered ?? selected;
 
   // Posiciona o cursor sob a aba selecionada ao montar / ao trocar de aba.
   useEffect(() => {
@@ -59,6 +65,7 @@ export function SlideTabs({ tabs = DEFAULT_TABS }: { tabs?: SlideTab[] }) {
     <ul
       onMouseLeave={() => {
         // Ao sair do container, volta o cursor para a aba selecionada.
+        setHovered(null);
         const selectedTab = tabsRef.current[selected];
         if (selectedTab) {
           const { width } = selectedTab.getBoundingClientRect();
@@ -71,10 +78,12 @@ export function SlideTabs({ tabs = DEFAULT_TABS }: { tabs?: SlideTab[] }) {
         <Tab
           key={tab.href}
           href={tab.href}
+          active={i === activeIndex}
           ref={(el) => {
             tabsRef.current[i] = el;
           }}
           setPosition={setPosition}
+          onMouseEnter={() => setHovered(i)}
           onClick={() => setSelected(i)}
         >
           {tab.label}
@@ -89,16 +98,19 @@ export function SlideTabs({ tabs = DEFAULT_TABS }: { tabs?: SlideTab[] }) {
 interface TabProps {
   children: ReactNode;
   href: string;
+  active: boolean;
   setPosition: Dispatch<SetStateAction<Position>>;
+  onMouseEnter: () => void;
   onClick: () => void;
 }
 
 const Tab = forwardRef<HTMLLIElement, TabProps>(
-  ({ children, href, setPosition, onClick }, ref) => {
+  ({ children, href, active, setPosition, onMouseEnter, onClick }, ref) => {
     return (
       <li
         ref={ref}
         onMouseEnter={(e) => {
+          onMouseEnter();
           // currentTarget (não ref.current): o parent passa um callback ref, então
           // ref.current seria undefined aqui. Assim o cursor desliza no hover.
           const el = e.currentTarget;
@@ -107,11 +119,15 @@ const Tab = forwardRef<HTMLLIElement, TabProps>(
         }}
         className="relative z-10 block"
       >
-        {/* âncora real → scroll suave pra seção (scroll-behavior global + scroll-mt) */}
+        {/* âncora real → scroll suave pra seção (scroll-behavior global + scroll-mt).
+            Sem mix-blend: cor explícita p/ o texto da aba ativa ficar legível
+            (escuro sobre o cursor branco); demais abas em branco. */}
         <a
           href={href}
           onClick={onClick}
-          className="block cursor-pointer px-3 py-1.5 text-xs uppercase text-white mix-blend-difference md:px-5 md:py-3 md:text-base"
+          className={`block cursor-pointer px-3 py-1.5 text-xs uppercase transition-colors duration-200 md:px-5 md:py-3 md:text-base ${
+            active ? "text-[#09090B]" : "text-white/80"
+          }`}
         >
           {children}
         </a>
