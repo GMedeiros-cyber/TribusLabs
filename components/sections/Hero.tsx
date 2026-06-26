@@ -3,15 +3,16 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowRight, Check } from "lucide-react";
-import { BackgroundVideo } from "@/components/sections/BackgroundVideo";
+import { HeroDitheringBackground } from "@/components/sections/HeroDitheringBackground";
 import { Navbar } from "@/components/sections/Navbar";
 import { Appear } from "@/components/motion/Appear";
+import { Parallax } from "@/components/motion/Parallax";
+import { LayeredText } from "@/components/ui/layered-text";
 
 // Nova hero por vídeo (Prompt 8). Tela cheia (100vh), fundo preto + vídeo HLS,
 // navbar glass + CTA de captura de e-mail. Decisão híbrida: headline/CTA em
 // PT-BR Tribus; tagline e "Play Video Demo" mantidos como no spec por ora.
 
-const HEADING_EASE = [0.16, 1, 0.3, 1] as const;
 const PROMPT_TEXT = "Seu melhor e-mail para o diagnóstico";
 const SUCCESS_TEXT = "Pronto! Retornamos em até 24h";
 const TYPE_MS = 60;
@@ -61,31 +62,34 @@ export function Hero() {
       id="top"
       className="relative bg-black h-screen w-full flex flex-col overflow-hidden selection:bg-white selection:text-black"
     >
-      <BackgroundVideo />
+      <Parallax className="absolute inset-0 pointer-events-none" amount={80}>
+        <HeroDitheringBackground />
+      </Parallax>
       <Navbar />
 
-      <section className="relative flex-1 flex flex-col items-center justify-center px-6">
-        <div className="relative z-10 text-center max-w-5xl mx-auto flex flex-col items-center justify-center w-full gap-12">
-          {/* Tagline (mantida como no spec, por ora) */}
+      <section className="relative flex-1 flex items-center px-6">
+        <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          {/* COLUNA ESQUERDA — tipografia 3D (LayeredText). Oculta no mobile p/ evitar overflow do skew. */}
+          <Appear
+            as="div"
+            from={{ opacity: 0, x: -20 }}
+            to={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3 }}
+            className="hidden md:flex justify-start order-1"
+          >
+            <LayeredText className="text-white" />
+          </Appear>
+
+          {/* COLUNA DIREITA — na ponta: tagline + CTA "Diagnóstico gratuito" (botão ↔ form) */}
+          <div className="order-2 flex flex-col items-center md:items-end gap-8 text-center md:text-right">
+          {/* Tagline */}
           <Appear
             as="p"
             from={{ opacity: 0, y: 10 }}
             transition={{ delay: 0.1 }}
-            className="text-white/80 text-[10px] md:text-[11px] font-medium tracking-[0.2em] uppercase mb-4"
+            className="text-white/80 text-[10px] md:text-[11px] font-medium tracking-[0.2em] uppercase"
           >
             BUILD A NO-CODE AI APP IN MINUTES
-          </Appear>
-
-          {/* Headline — Tribus PT-BR, em Instrument Serif */}
-          <Appear
-            as="h1"
-            from={{ opacity: 0, y: 20 }}
-            transition={{ duration: 1, ease: HEADING_EASE }}
-            style={{ fontFamily: "var(--font-serif), 'Instrument Serif', serif" }}
-            className="text-4xl md:text-[64px] font-medium tracking-[-0.01em] leading-[1.1] mb-6 bg-gradient-to-b from-white via-white/95 to-white/70 bg-clip-text text-transparent max-w-4xl"
-          >
-            Você não assina. Você não aluga.
-            <br className="hidden md:block" /> Você possui.
           </Appear>
 
           {/* CTA — botão ↔ form de e-mail (Tribus PT-BR) */}
@@ -93,7 +97,7 @@ export function Hero() {
             as="div"
             from={{ opacity: 0, y: 10 }}
             transition={{ delay: 0.4 }}
-            className="min-h-[50px] mt-2"
+            className="min-h-[50px]"
           >
             <AnimatePresence mode="wait">
               {mode === "button" ? (
@@ -154,16 +158,7 @@ export function Hero() {
               )}
             </AnimatePresence>
           </Appear>
-
-          {/* Play demo (mantido como no spec, por ora) */}
-          <Appear as="div" from={{ opacity: 0 }} to={{ opacity: 1 }} transition={{ delay: 0.8 }}>
-            <a
-              href="#"
-              className="text-white/80 hover:text-white/40 transition-colors duration-300 text-[13px] font-medium tracking-wide"
-            >
-              Play Video Demo
-            </a>
-          </Appear>
+          </div>
         </div>
       </section>
     </div>
