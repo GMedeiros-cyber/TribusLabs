@@ -1,6 +1,6 @@
 "use client";
 
-import { Reveal } from "@/components/motion/Reveal";
+import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { Parallax } from "@/components/motion/Parallax";
 
 // §11/02 — Resultados que entregamos. Mostra VALOR DE NEGÓCIO (o que o cliente
@@ -40,19 +40,19 @@ export function Results() {
     >
       <div className="mx-auto max-w-[1200px] px-6 md:px-12">
         <Parallax>
-          <Reveal>
+          <ScrollReveal>
             {/* eyebrow em secondary (regra global — AA) */}
             <p className="text-eyebrow text-text-secondary">O que você ganha</p>
             <h2 className="text-display-lg mt-3 max-w-3xl text-balance text-text-primary">
               Resultado que aparece no caixa, não no relatório.
             </h2>
-          </Reveal>
+          </ScrollReveal>
         </Parallax>
 
         <Parallax className="mt-12" amount={28}>
           <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {RESULTS.map((r, i) => (
-              <Reveal key={r.label} delay={i * STAGGER}>
+              <ScrollReveal key={r.label} delay={i * STAGGER}>
                 <div className="flex h-full flex-col">
                   <dt>
                     <span className="text-display-md text-accent">{r.value}</span>
@@ -64,7 +64,7 @@ export function Results() {
                     {r.context}
                   </dd>
                 </div>
-              </Reveal>
+              </ScrollReveal>
             ))}
           </dl>
         </Parallax>

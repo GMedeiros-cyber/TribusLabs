@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useReducedMotion } from "motion/react";
-import { Reveal } from "@/components/motion/Reveal";
+import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { Parallax } from "@/components/motion/Parallax";
 
 type Case = {
@@ -103,16 +103,16 @@ export function Cases() {
       <div className="mx-auto max-w-[1200px]">
         <div className="px-6 md:px-12">
           <Parallax>
-            <Reveal>
+            <ScrollReveal>
               <p className="text-eyebrow text-text-secondary">Resultados reais</p>
               <h2 className="text-display-lg mt-3 max-w-3xl text-balance text-text-primary">
                 Não é promessa. É o que já entregamos.
               </h2>
-            </Reveal>
+            </ScrollReveal>
           </Parallax>
         </div>
 
-        <Reveal>
+        <ScrollReveal>
           {/* carousel — scroll-snap horizontal, peek do próximo card */}
           <div
             ref={scrollerRef}
@@ -197,7 +197,7 @@ export function Cases() {
               <ChevronRight className="h-4 w-4" />
             </button>
           </div>
-        </Reveal>
+        </ScrollReveal>
       </div>
     </section>
   );

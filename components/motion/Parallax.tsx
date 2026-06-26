@@ -21,13 +21,15 @@ interface ParallaxProps {
 //   (no servidor renderiza um <div> neutro; o transform só entra após montar).
 // • Respeita prefers-reduced-motion via gsap.matchMedia (não anima se reduzido).
 // • Cleanup automático do useGSAP + mm.revert() ao desmontar.
-export function Parallax({ children, className, amount = 48 }: ParallaxProps) {
+export function Parallax({ children, className, amount = 160 }: ParallaxProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
+        // Range encurtado (top 85% → bottom 20%) concentra o deslocamento numa
+        // janela menor de scroll → movimento perceptível (antes era invisível).
         gsap.fromTo(
           ref.current,
           { y: amount / 2 },
@@ -36,8 +38,8 @@ export function Parallax({ children, className, amount = 48 }: ParallaxProps) {
             ease: "none",
             scrollTrigger: {
               trigger: ref.current,
-              start: "top bottom",
-              end: "bottom top",
+              start: "top 85%",
+              end: "bottom 20%",
               scrub: true,
             },
           },

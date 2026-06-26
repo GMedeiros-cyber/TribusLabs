@@ -1,7 +1,7 @@
 "use client";
 
 import { Check, X } from "lucide-react";
-import { Reveal } from "@/components/motion/Reveal";
+import { ScrollReveal } from "@/components/motion/ScrollReveal";
 
 // §11/04 — Posicionamento diferencial. Por QUE a Tribus (não como).
 // Cada ponto contrasta a "negação" (riscada) com a "afirmação" (accent).
@@ -18,7 +18,7 @@ export function Positioning() {
     // seção de respiro/impacto — padding vertical maior (120px desktop)
     <section className="bg-surface-1 py-24 md:py-[120px]">
       <div className="mx-auto max-w-[1200px] px-6 md:px-12">
-        <Reveal>
+        <ScrollReveal>
           <p className="text-eyebrow text-text-secondary">Por que a Tribus</p>
           <h2 className="text-display-lg mt-3 max-w-3xl text-balance text-text-primary">
             Agência te cobra pra sempre. A Tribus te entrega a chave.
@@ -28,11 +28,11 @@ export function Positioning() {
             algo que nunca é seu. Quando para de pagar, perde tudo. Aqui o sistema
             é construído, entregue, e a propriedade passa pra você.
           </p>
-        </Reveal>
+        </ScrollReveal>
 
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
           {CONTRASTS.map((c, i) => (
-            <Reveal key={c.yes} delay={i * STAGGER}>
+            <ScrollReveal key={c.yes} delay={i * STAGGER}>
               <div className="flex h-full flex-col gap-4 rounded-lg border-[0.5px] border-border bg-surface-2 p-6">
                 {/* negação — secondary (AA) + riscado + X */}
                 <div className="flex items-center gap-3">
@@ -52,7 +52,7 @@ export function Positioning() {
                   </span>
                 </div>
               </div>
-            </Reveal>
+            </ScrollReveal>
           ))}
         </div>
       </div>

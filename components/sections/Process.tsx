@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import { Reveal } from "@/components/motion/Reveal";
+import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { Parallax } from "@/components/motion/Parallax";
 import { useMounted } from "@/components/motion/useMounted";
 
@@ -59,7 +59,7 @@ export function Process() {
     <section id="como-funciona" className="scroll-mt-20 bg-bg py-16 md:py-24">
       <div className="mx-auto max-w-[1200px] px-6 md:px-12">
         <Parallax>
-          <Reveal>
+          <ScrollReveal>
             <p className="text-eyebrow text-text-secondary">Processo</p>
             <h2 className="text-display-lg mt-3 max-w-3xl text-balance text-text-primary">
               Do diagnóstico à chave na mão.
@@ -68,13 +68,13 @@ export function Process() {
               Três etapas. Sem enrolação, sem mensalidade surpresa. Quando
               termina, o sistema é seu.
             </p>
-          </Reveal>
+          </ScrollReveal>
         </Parallax>
 
         <ol className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-6">
           {STEPS.map((s, i) => (
             <li key={s.n}>
-              <Reveal delay={i * STAGGER} className="relative">
+              <ScrollReveal delay={i * STAGGER} className="relative">
                 {i < STEPS.length - 1 && (
                   <Connector delay={i * STAGGER + 0.15} />
                 )}
@@ -85,7 +85,7 @@ export function Process() {
                 <p className="text-body-sm mt-2 max-w-xs text-text-secondary">
                   {s.desc}
                 </p>
-              </Reveal>
+              </ScrollReveal>
             </li>
           ))}
         </ol>

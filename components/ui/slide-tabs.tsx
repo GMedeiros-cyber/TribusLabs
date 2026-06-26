@@ -23,9 +23,20 @@ interface Position {
   opacity: number;
 }
 
-const DEFAULT_TABS = ["Home", "Pricing", "Features", "Docs", "Blog"];
+export interface SlideTab {
+  label: string;
+  href: string;
+}
 
-export function SlideTabs({ tabs = DEFAULT_TABS }: { tabs?: string[] }) {
+// Links reais → seções da home (scroll suave via CSS scroll-behavior + scroll-mt).
+const DEFAULT_TABS: SlideTab[] = [
+  { label: "Serviços", href: "#servicos" },
+  { label: "Como funciona", href: "#como-funciona" },
+  { label: "Cases", href: "#cases" },
+  { label: "Contato", href: "#contato" },
+];
+
+export function SlideTabs({ tabs = DEFAULT_TABS }: { tabs?: SlideTab[] }) {
   const [position, setPosition] = useState<Position>({
     left: 0,
     width: 0,
@@ -58,14 +69,15 @@ export function SlideTabs({ tabs = DEFAULT_TABS }: { tabs?: string[] }) {
     >
       {tabs.map((tab, i) => (
         <Tab
-          key={tab}
+          key={tab.href}
+          href={tab.href}
           ref={(el) => {
             tabsRef.current[i] = el;
           }}
           setPosition={setPosition}
           onClick={() => setSelected(i)}
         >
-          {tab}
+          {tab.label}
         </Tab>
       ))}
 
@@ -76,16 +88,16 @@ export function SlideTabs({ tabs = DEFAULT_TABS }: { tabs?: string[] }) {
 
 interface TabProps {
   children: ReactNode;
+  href: string;
   setPosition: Dispatch<SetStateAction<Position>>;
   onClick: () => void;
 }
 
 const Tab = forwardRef<HTMLLIElement, TabProps>(
-  ({ children, setPosition, onClick }, ref) => {
+  ({ children, href, setPosition, onClick }, ref) => {
     return (
       <li
         ref={ref}
-        onClick={onClick}
         onMouseEnter={(e) => {
           // currentTarget (não ref.current): o parent passa um callback ref, então
           // ref.current seria undefined aqui. Assim o cursor desliza no hover.
@@ -93,9 +105,16 @@ const Tab = forwardRef<HTMLLIElement, TabProps>(
           const { width } = el.getBoundingClientRect();
           setPosition({ left: el.offsetLeft, width, opacity: 1 });
         }}
-        className="relative z-10 block cursor-pointer px-3 py-1.5 text-xs uppercase text-white mix-blend-difference md:px-5 md:py-3 md:text-base"
+        className="relative z-10 block"
       >
-        {children}
+        {/* âncora real → scroll suave pra seção (scroll-behavior global + scroll-mt) */}
+        <a
+          href={href}
+          onClick={onClick}
+          className="block cursor-pointer px-3 py-1.5 text-xs uppercase text-white mix-blend-difference md:px-5 md:py-3 md:text-base"
+        >
+          {children}
+        </a>
       </li>
     );
   },

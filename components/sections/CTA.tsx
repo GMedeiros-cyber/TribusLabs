@@ -5,7 +5,7 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { CheckCircle2 } from "lucide-react";
-import { Reveal } from "@/components/motion/Reveal";
+import { ScrollReveal } from "@/components/motion/ScrollReveal";
 
 // §11/08 — CTA final. Seção fullwidth que PERMANECE dark mesmo em light mode
 // (classe .section-dark força os tokens dark no subtree). Formulário de
@@ -75,7 +75,7 @@ export function CTA() {
   return (
     <section id="contato" className="section-dark scroll-mt-20 px-6 py-[120px]">
       <div className="mx-auto max-w-[640px]">
-        <Reveal>
+        <ScrollReveal>
           <p className="text-eyebrow text-text-secondary">Próximo passo</p>
           <h2 className="text-display-lg mt-3 text-balance text-text-primary">
             Vamos achar o gargalo da sua empresa?
@@ -84,9 +84,9 @@ export function CTA() {
             Diagnóstico gratuito. A gente olha sua operação e mostra onde dá pra
             automatizar. Resposta em até 24h, sem compromisso.
           </p>
-        </Reveal>
+        </ScrollReveal>
 
-        <Reveal delay={0.06}>
+        <ScrollReveal delay={0.06}>
           {submitted ? (
             <div
               role="status"
@@ -254,7 +254,7 @@ export function CTA() {
               </p>
             </form>
           )}
-        </Reveal>
+        </ScrollReveal>
       </div>
     </section>
   );

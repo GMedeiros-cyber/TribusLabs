@@ -2,10 +2,12 @@
 
 import { Appear } from "@/components/motion/Appear";
 import { SlideTabs } from "@/components/ui/slide-tabs";
+import { Logo } from "@/components/ui/Logo";
 
 // Navbar do hero: logo Tribus Labs (canto sup. esq., absoluto) + SlideTabs
 // CENTRALIZADA. Botões Sign Up/Login removidos — a slide-nav substitui a navbar
-// antiga (decisão do usuário). Logo: public/logo_tribus_labs.svg.
+// antiga (decisão do usuário). Logo: <Logo /> inline com currentColor →
+// text-[#E8E8ED] (near-white) p/ aparecer sobre o hero escuro.
 
 export function Navbar() {
   return (
@@ -19,15 +21,10 @@ export function Navbar() {
       <div className="relative flex items-center justify-center max-w-6xl mx-auto">
         <a
           href="#top"
+          aria-label="Tribus Labs — início"
           className="absolute left-0 top-1/2 -translate-y-1/2 flex items-center shrink-0"
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/logo_tribus_labs.svg"
-            alt="Tribus Labs"
-            width={200}
-            className="h-auto w-[140px] md:w-[180px]"
-          />
+          <Logo className="h-auto w-[140px] text-[#E8E8ED] md:w-[180px]" />
         </a>
 
         <SlideTabs />

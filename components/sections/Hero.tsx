@@ -87,9 +87,9 @@ export function Hero() {
             as="p"
             from={{ opacity: 0, y: 10 }}
             transition={{ delay: 0.1 }}
-            className="text-white/80 text-[10px] md:text-[11px] font-medium tracking-[0.2em] uppercase"
+            className="text-text-secondary text-sm md:text-base font-medium tracking-wide"
           >
-            BUILD A NO-CODE AI APP IN MINUTES
+            Descubra onde a Tribus pode te ajudar, hoje!
           </Appear>
 
           {/* CTA — botão ↔ form de e-mail (Tribus PT-BR) */}

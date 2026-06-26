@@ -20,13 +20,13 @@ interface LayeredTextProps {
 
 export function LayeredText({
   lines = [
-    { top: " ", bottom: "INFINITE" },
-    { top: "INFINITE", bottom: "PROGRESS" },
-    { top: "PROGRESS", bottom: "INNOVATION" },
-    { top: "INNOVATION", bottom: "FUTURE" },
-    { top: "FUTURE", bottom: "DREAMS" },
-    { top: "DREAMS", bottom: "ACHIEVEMENT" },
-    { top: "ACHIEVEMENT", bottom: " " },
+    { top: " ", bottom: "FUTURO" },
+    { top: "FUTURO", bottom: "INOVAÇÃO" },
+    { top: "INOVAÇÃO", bottom: "ESTRUTURA" },
+    { top: "ESTRUTURA", bottom: "INTELIGÊNCIA" },
+    { top: "INTELIGÊNCIA", bottom: "AUTONOMIA" },
+    { top: "AUTONOMIA", bottom: "EVOLUÇÃO" },
+    { top: "EVOLUÇÃO", bottom: " " },
   ],
   fontSize = "72px",
   fontSizeMd = "36px",

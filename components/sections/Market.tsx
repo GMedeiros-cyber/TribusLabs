@@ -1,6 +1,6 @@
 "use client";
 
-import { Reveal } from "@/components/motion/Reveal";
+import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { Parallax } from "@/components/motion/Parallax";
 
 // §11/06 — O mercado já decidiu. Prova social por autoridade: empresas globais
@@ -51,7 +51,7 @@ export function Market() {
     <section className="bg-surface-1 py-16 md:py-24">
       <div className="mx-auto max-w-[1200px] px-6 md:px-12">
         <Parallax>
-          <Reveal>
+          <ScrollReveal>
             <p className="text-eyebrow text-text-secondary">O mercado já decidiu</p>
             <h2 className="text-display-lg mt-3 max-w-3xl text-balance text-text-primary">
               Quem entendeu cedo, saiu na frente.
@@ -61,13 +61,13 @@ export function Market() {
               resultado mensurável. A diferença é que agora isso cabe na sua
               empresa também.
             </p>
-          </Reveal>
+          </ScrollReveal>
         </Parallax>
 
         <Parallax className="mt-12" amount={28}>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {COMPANIES.map((c, i) => (
-              <Reveal key={c.name} delay={i * STAGGER}>
+              <ScrollReveal key={c.name} delay={i * STAGGER}>
                 <div className="flex h-full flex-col rounded-lg border-[0.5px] border-border bg-surface-2 p-6">
                   <h3 className="text-heading text-text-primary">{c.name}</h3>
                   <p className="text-display-sm mt-3 text-accent">{c.stat}</p>
@@ -75,16 +75,16 @@ export function Market() {
                     {c.context}
                   </p>
                 </div>
-              </Reveal>
+              </ScrollReveal>
             ))}
           </div>
         </Parallax>
 
-        <Reveal delay={STAGGER * 2}>
+        <ScrollReveal delay={STAGGER * 2}>
           <p className="text-display-md mx-auto mt-12 max-w-3xl text-balance text-center text-text-primary">
             Seu concorrente já está se movendo. A pergunta é: e você?
           </p>
-        </Reveal>
+        </ScrollReveal>
       </div>
     </section>
   );

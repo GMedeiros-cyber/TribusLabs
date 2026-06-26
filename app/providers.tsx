@@ -2,6 +2,7 @@
 
 import { ThemeProvider } from "next-themes";
 import type { ReactNode } from "react";
+import { ScrollRefresh } from "@/components/motion/ScrollRefresh";
 
 // PROMPT §4 — next-themes wired to the data-theme attribute, dark by default,
 // system preference disabled. suppressHydrationWarning on <html> (layout.tsx)
@@ -14,6 +15,7 @@ export function Providers({ children }: { children: ReactNode }) {
       enableSystem={false}
     >
       {children}
+      <ScrollRefresh />
     </ThemeProvider>
   );
 }
