@@ -1,5 +1,6 @@
 import { Hero } from "@/components/sections/Hero";
-import { Results } from "@/components/sections/Results";
+import { ScrollStroke } from "@/components/sections/ScrollStroke";
+import { About } from "@/components/sections/About";
 import { Services } from "@/components/sections/Services";
 import { Positioning } from "@/components/sections/Positioning";
 import { Process } from "@/components/sections/Process";
@@ -17,12 +18,14 @@ export default function Home() {
     <>
       <Hero />
       <main>
-        <Results />
+        <About />
         <Services />
         <Positioning />
         <Process />
         <Market />
         <Cases />
+        {/* Traço SVG que se desenha conforme o scroll (Skiper19) — momento final. */}
+        <ScrollStroke />
         <CTA />
       </main>
       <Footer />

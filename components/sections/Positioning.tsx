@@ -16,7 +16,7 @@ const STAGGER = 0.12; // 120ms entre cards (§7) — cascata mais visível
 export function Positioning() {
   return (
     // seção de respiro/impacto — padding vertical maior (120px desktop)
-    <section className="bg-surface-1 py-24 md:py-[120px]">
+    <section className="bg-bg py-24 md:py-[120px]">
       <div className="mx-auto max-w-[1200px] px-6 md:px-12">
         <ScrollReveal>
           <p className="text-eyebrow text-text-secondary">Por que a Tribus</p>

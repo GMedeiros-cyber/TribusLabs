@@ -4,12 +4,12 @@ import { HeroDitheringBackground } from "@/components/sections/HeroDitheringBack
 import { Navbar } from "@/components/sections/Navbar";
 import { Appear } from "@/components/motion/Appear";
 import { Parallax } from "@/components/motion/Parallax";
-import { LayeredText } from "@/components/ui/layered-text";
+import { TextRollList } from "@/components/ui/text-roll";
 import { ShimmerText } from "@/components/ui/shimmer-text";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 
 // Hero tela cheia (100vh): fundo dithering (com Parallax) + navbar centralizada.
-// Tipografia 3D (LayeredText) à esquerda; bloco de CTA no CANTO INFERIOR DIREITO
+// Tipografia (TextRoll, roll no hover) à esquerda; bloco de CTA no CANTO INFERIOR DIREITO
 // (ShimmerText em cima + Interactive Hover Button embaixo). O botão rola pra
 // #contato (form de qualificação na seção CTA).
 
@@ -34,15 +34,15 @@ export function Hero() {
 
       <section className="relative flex-1 flex items-center px-6">
         <div className="relative z-10 w-full max-w-7xl mx-auto">
-          {/* Tipografia 3D — esquerda. Oculta no mobile p/ evitar overflow do skew. */}
+          {/* Tipografia (roll no hover) — canto esquerdo (onde foi sinalizado). */}
           <Appear
             as="div"
             from={{ opacity: 0, x: -20 }}
             to={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
-            className="hidden md:flex justify-start"
+            className="flex justify-start"
           >
-            <LayeredText className="text-white" />
+            <TextRollList className="text-white" />
           </Appear>
         </div>
       </section>

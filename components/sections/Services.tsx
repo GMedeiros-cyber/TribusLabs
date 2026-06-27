@@ -8,6 +8,7 @@ import {
   LayoutGrid,
   MessagesSquare,
   Sparkles,
+  UserCog,
 } from "lucide-react";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 
@@ -47,6 +48,12 @@ const SERVICES: Service[] = [
     title: "Conteúdo visual",
     description: "Material pensado pra atrair e vender, não só pra postar.",
   },
+  {
+    icon: UserCog,
+    title: "Assistente pessoal",
+    description:
+      "Um assistente no seu próprio WhatsApp que acompanha a evolução da empresa: lê o CRM, responde e-mail, marca na agenda e te mantém no controle.",
+  },
 ];
 
 const STAGGER = 0.12; // 120ms entre cards (§7) — cascata mais visível
@@ -58,7 +65,7 @@ export function Services() {
         <ScrollReveal>
           <p className="text-eyebrow text-text-secondary">Serviços</p>
           <h2 className="text-display-lg mt-3 max-w-3xl text-balance text-text-primary">
-            Seis funcionários digitais. Um sistema só.
+            Sete funcionários digitais. Um sistema só.
           </h2>
           <p className="text-body-lg mt-4 max-w-[600px] text-text-secondary">
             Cada peça resolve uma parte da sua operação. Juntas, elas
@@ -66,17 +73,24 @@ export function Services() {
           </p>
         </ScrollReveal>
 
-        <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {SERVICES.map((s, i) => {
               const Icon = s.icon;
+              // O 7º card (Assistente pessoal) é o diferencial: ocupa a linha
+              // inteira no desktop (lg:col-span-3) p/ respirar.
+              const isFeatured = i === SERVICES.length - 1;
               return (
-                <ScrollReveal key={s.title} delay={i * STAGGER}>
+                <ScrollReveal
+                  key={s.title}
+                  delay={i * STAGGER}
+                  className={isFeatured ? "lg:col-span-3" : undefined}
+                >
                   <article className="service-card h-full">
                     <Icon className="h-6 w-6 text-accent" aria-hidden />
                     <h3 className="text-heading mt-4 text-text-primary">
                       {s.title}
                     </h3>
-                    <p className="text-body-sm mt-2 text-text-secondary">
+                    <p className="text-body-sm mt-2 max-w-2xl text-text-secondary">
                       {s.description}
                     </p>
                   </article>

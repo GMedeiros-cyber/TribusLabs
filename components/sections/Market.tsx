@@ -47,7 +47,7 @@ const STAGGER = 0.12; // 120ms entre cards (§7) — cascata mais visível
 
 export function Market() {
   return (
-    <section className="bg-surface-1 py-16 md:py-24">
+    <section className="bg-bg py-16 md:py-24">
       <div className="mx-auto max-w-[1200px] px-6 md:px-12">
         <ScrollReveal>
           <p className="text-eyebrow text-text-secondary">O mercado já decidiu</p>

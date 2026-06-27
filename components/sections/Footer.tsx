@@ -10,7 +10,7 @@ const NAV_LINKS = [
 
 export function Footer() {
   return (
-    <footer className="border-t-[0.5px] border-border bg-surface-1 px-6 py-12 md:px-12">
+    <footer className="border-t-[0.5px] border-border bg-bg px-6 py-12 md:px-12">
       <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
         {/* Coluna 1 — marca */}
         <div>
